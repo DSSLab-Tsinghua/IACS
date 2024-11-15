@@ -1,4 +1,4 @@
-# ACS without Trusted Setup or Public-Key Cryptography
+# Asynchronous BFT Library - IACS
 
 ## Description
 
@@ -10,7 +10,7 @@ Eprint version: https://eprint.iacr.org/2024/677
 
 This repository implements three BFT protocols:
 
-- ACS without Trusted Setup or Public-Key Cryptography
+- IACS
 - FIN(for evaluation only, Sisi Duan, Xin Wang and Haibin Zhang. FIN: Practical Signature-Free Asynchronous Common Subset in Constant Time. CCS 2023.)
 - PACE(for evaluation only, Haibin Zhang and Sisi Duan. PACE: Fully Parallelizable Asynchronous BFT from Reproposable Byzantine Agreement. CCS 2022.)
 
