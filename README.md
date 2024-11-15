@@ -1,55 +1,63 @@
-# Asynchronous BFT Library - ACS
+# ACS without Trusted Setup or Public-Key Cryptography
 
 ## Description
-Implementation of asynchronous BFT protocols - ACS from a modular software framework. 
-```bash
-@misc{cryptoeprint:2024/677,
-      author = {Sourav Das and Sisi Duan and Shengqi Liu and Atsuki Momose and Ling Ren and Victor Shoup},
-      title = {Asynchronous Consensus without Trusted Setup or Public-Key Cryptography},
-      howpublished = {Cryptology {ePrint} Archive, Paper 2024/677},
-      year = {2024},
-      doi = {10.1145/3658644.3670327},
-      url = {https://eprint.iacr.org/2024/677}
-}
-```
 
-This repository implements three protocols:
+Asynchronous fault-tolerant protocols for the following paper:
 
-- ACS
-- FIN
-- PACE 
+Sourav Das, Sisi Duan, Shengqi Liu, Atsuki Momose, Ling Ren and Victor Shoup. "Asynchronous Consensus without Trusted Setup or Public-Key Cryptography." CCS 2024.
 
+Eprint version: https://eprint.iacr.org/2024/677
 
-Different RBC modules are implemented under src/broadcast, and different ABA modules are impleented under src/aba. See the README files under each folder for details.
+This repository implements three BFT protocols:
 
-Scripts for evaluation on Amazon EC2 are not povided in this repo. 
+- ACS without Trusted Setup or Public-Key Cryptography
+- FIN(for evaluation only, Sisi Duan, Xin Wang and Haibin Zhang. FIN: Practical Signature-Free Asynchronous Common Subset in Constant Time. CCS 2023.)
+- PACE(for evaluation only, Haibin Zhang and Sisi Duan. PACE: Fully Parallelizable Asynchronous BFT from Reproposable Byzantine Agreement. CCS 2022.)
+
+Scripts for evaluation on Amazon EC2 are not povided in this repo.
 
 ## Configuration
 Configuration is under etc/conf.json
 
 Change "consensus" to switch between the protocols. See note.txt for details.
 
+## Experimental environment && Dependency
+
+last accessed:20241115
+
+- system: ubuntu 20.04
+- github.com/cbergoon/merkletree v0.2.0
+- github.com/klauspost/reedsolomon v1.12.4
+- github.com/vmihailenco/msgpack v4.0.4+incompatible
+- google.golang.org/grpc v1.67.1
+- google.golang.org/protobuf v1.35.1
+- github.com/klauspost/cpuid/v2 v2.2.8 // indirect
+- golang.org/x/net v0.28.0 // indirect
+- golang.org/x/sys v0.24.0 // indirect
+- golang.org/x/text v0.17.0 // indirect
+- google.golang.org/appengine v1.6.8 // indirect
+- google.golang.org/genproto/googleapis/rpc v0.0.0-20240814211410-ddb44dafa142 // indirect
+- gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
+
 ## Installation && How to run the code
 
-#### 1.  Configuration environment: 
-Use gomodule mode
-```
-/usr/local/go/bin/go env -w GO111MODULE=on
-```
+### Install dependencies
 
-#### 2.  Go build:
-Use the following command under the acs project directory
+Enter the directory and run the following commands:
 
 ```
-sudo rm -rf /var/log
-/usr/local/go/bin/go build src/main/server.go
-/usr/local/go/bin/go build src/main/client.go
+export GO111MODULE=on
+go build src/main/server.go
+go build src/main/client.go
 ```
 
-#### 3.  Start the servers:
+### Start the servers
+
 Usage: ./server [Sid]
 
 - Example for 4 servers with 1 failure node:
+
+Enter the directory and run the following commands:
 
 ```
 ./server 0
@@ -58,7 +66,8 @@ Usage: ./server [Sid]
 ./server 3
 ```
 
-#### 4.  Start the client:
+### Start the client
+
 Usage: ./client [Cid] [TypeOfRequest] [BatchSize] [Message] [Frequency]
 
 ```
@@ -74,16 +83,23 @@ Optional arguments:
 
 - Eamples:
 	- Start a client with ID = 100, and send one write request with content "hi".
+	
+	  Enter the directory and run the following commands:
 	```
 	./client 100 0 1 hi 
 	```
-
+	
 	- Start a client with ID = 100, and send 10 write requests with the default message.
+	
+	  Enter the directory and run the following commands:
 	```
 	./client 100 0 10 
 	```
 	
 	- Start a client with ID = 100, and send batch requests with size 10 and "hi" message, frequency is 5.
+	
+	  Enter the directory and run the following commands:
+	
 	```
 	./client 100 1 10 hi 5
 	```
