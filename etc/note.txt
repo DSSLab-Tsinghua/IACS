@@ -1,0 +1,14 @@
+consensus:
+    6: PACE 
+    17：FIN
+    100：ACS
+
+RBCType:
+    0: RBC
+    1: erasure code RBC
+
+maliciousMode:
+    0: failure free scenario, no malicious nodes
+    1: crash failure scenario
+    2: 0--(f-1) are the malicious nodes that always vote 0 in ABA
+    3: malicious nodes always vote the opposite value (XOR 1) in ABA
